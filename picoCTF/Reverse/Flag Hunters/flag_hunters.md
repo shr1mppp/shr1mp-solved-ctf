@@ -189,19 +189,20 @@ There are some line of code we need to noticed
         song_lines[lip] = 'Crowd: ' + crowd
 ```
 The 3 lines below mean that if program see the format `Crowd: something` it will run the block of code inside it. The important part here is the `song_lines[lip].split(';')`
-meaning that when program run into a ';' in `song_lines` it will split and `for function` will eventually process each part independently. So when it run into `CROWD: (something)`, if I enter `shrimp;RETURN 0`, the saved line become `Crowd: shrimp;RETURN 0`, and when it run to `Crowd part` again, the program will split `Crowd: shrimp;RETURN 0` into 2 parts `Crowd: shrimp`, `RETURN 0`, the program then process each part as different lines.
+meaning that when program run into a ';' in `song_lines` it will split and `for function` will eventually process each part independently. So when it run into `CROWD: (something)`, if I enter `shrimp;mikudayo`, the saved line become `Crowd: shrimp;mikudayo`, and when it run to `Crowd part` again, the program will split `Crowd: shrimp;mikudayo` into 2 parts `Crowd: shrimp`, `mikudayo`, the program then process each part as different lines.
 
-After that the program need to process `RETURN 0`, it will run this 2 lines of code:
+What we also need to notice are these 2 lines
 
-(which is anything start with RETURN + a number from 0-9 from song_lines will activate the block of code inside)
-
-```bash
+```python
 elif re.match(r"RETURN [0-9]+", line):
         lip = int(line.split()[1])
 ```
-Noticed that value greater than 1 is value of lip, lip is an index into song_lines, so what is `RETURN 0` will do? 
+These 2 lines mean that what satisfy the format `RETURN + a number(basically a string formed only by number from 0-9)` will run block of code inside it,
+which is set `lip = 'number after RETURN'`
 
-When `lip = 0` it will print first line of `song_lines` which is the `secret_intro` and reveal the flag !!!!!!!
+Noticed that `lip` is an index to point at each line of `song_lines`. When `lip = 1` it will run second line, I wonder what `lip = 0` will do?
+
+I test it and when `lip = 0` program print first line of `song_lines` which is the `secret_intro` and reveal the flag !!!!!!!
 
 # Solution 
 
